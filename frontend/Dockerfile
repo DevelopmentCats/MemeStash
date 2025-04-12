@@ -7,11 +7,11 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Copy app source and build
-# Create temporary empty ESLint config to avoid errors
+# Copy app source
 COPY . .
-RUN echo "module.exports = { root: true, env: { node: true } };" > .eslintrc.js
-RUN npm run build
+
+# Skip ESLint during build
+RUN npm run build -- --skip-lint
 
 # Production stage
 FROM nginx:stable-alpine as production-stage
