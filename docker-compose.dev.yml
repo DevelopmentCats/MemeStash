@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  # Frontend development service
+  frontend-dev:
+    image: node:18-alpine
+    working_dir: /app
+    command: sh -c "npm install && npm run serve"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./frontend:/app
+    environment:
+      - NODE_ENV=development
+    networks:
+      - meme-network-dev
+
+  # Backend development service
+  backend-dev:
+    image: node:18-alpine
+    working_dir: /app
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - DB_HOST=postgres-dev
+      - DB_PORT=5432
+      - DB_NAME=memestash
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres_password
+      - DB_SSL=false
+    depends_on:
+      - postgres-dev
+    networks:
+      - meme-network-dev
+
+  # PostgreSQL database for development
+  postgres-dev:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=memestash
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres_password
+    volumes:
+      - postgres-dev-data:/var/lib/postgresql/data
+    networks:
+      - meme-network-dev
+
+networks:
+  meme-network-dev:
+    driver: bridge
+
+volumes:
+  postgres-dev-data:
