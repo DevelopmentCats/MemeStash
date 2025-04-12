@@ -370,7 +370,8 @@ export default {
         // This is a placeholder for the actual API call
         await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API delay
         
-        const response = await axios.post('/api/auth/register', this.newAccount);
+        // Register user
+        await axios.post('/api/auth/register', this.newAccount);
         
         // Log in the user
         await axios.post('/api/auth/login', {
