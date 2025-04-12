@@ -6,37 +6,37 @@
     
     <ul class="nav-list" :class="{ 'mobile-open': mobileMenuOpen }">
       <li class="nav-item">
-        <router-link to="/" class="nav-link" exact @click.native="closeMobileMenu">
+        <router-link to="/" class="nav-link" exact @click="closeMobileMenu">
           <span class="nav-icon">🏠</span>
           <span class="nav-text">Home</span>
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/library" class="nav-link" @click.native="closeMobileMenu">
+        <router-link to="/library" class="nav-link" @click="closeMobileMenu">
           <span class="nav-icon">🖼️</span>
           <span class="nav-text">Library</span>
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/upload" class="nav-link" @click.native="closeMobileMenu">
+        <router-link to="/upload" class="nav-link" @click="closeMobileMenu">
           <span class="nav-icon">⬆️</span>
           <span class="nav-text">Upload</span>
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/tags" class="nav-link" @click.native="closeMobileMenu">
+        <router-link to="/tags" class="nav-link" @click="closeMobileMenu">
           <span class="nav-icon">🏷️</span>
           <span class="nav-text">Tags</span>
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/categories" class="nav-link" @click.native="closeMobileMenu">
+        <router-link to="/categories" class="nav-link" @click="closeMobileMenu">
           <span class="nav-icon">📁</span>
           <span class="nav-text">Categories</span>
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/about" class="nav-link" @click.native="closeMobileMenu">
+        <router-link to="/about" class="nav-link" @click="closeMobileMenu">
           <span class="nav-icon">ℹ️</span>
           <span class="nav-text">About</span>
         </router-link>
@@ -78,7 +78,7 @@ export default {
     }
   },
   // Cleanup when component is destroyed
-  beforeDestroy() {
+  beforeUnmount() {
     document.body.classList.remove('menu-open');
   }
 }

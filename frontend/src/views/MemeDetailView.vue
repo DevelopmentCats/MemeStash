@@ -365,7 +365,7 @@ export default {
       document.body.removeChild(link);
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     // Reset page title and clean up
     document.title = 'Meme Stash';
     document.body.classList.remove('no-scroll');
